@@ -1,5 +1,6 @@
 package com.rutkauskas.toDoBackend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
 public class Task {
@@ -8,7 +9,10 @@ public class Task {
   private String title;
   private boolean archived;
 
-  public Task(UUID id, String title, boolean archived) {
+  public Task(
+      @JsonProperty("id") UUID id,
+      @JsonProperty("title") String title,
+      @JsonProperty("archived") boolean archived) {
     this.id = id;
     this.title = title;
     this.archived = archived;

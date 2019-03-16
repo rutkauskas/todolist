@@ -4,7 +4,9 @@ import com.rutkauskas.toDoBackend.model.Task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.stereotype.Repository;
 
+@Repository("fakeDao")
 public class FakeTaskDataAccessService implements TaskDao {
 
   private static List<Task> DB = new ArrayList<>();
