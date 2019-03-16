@@ -15,4 +15,6 @@ public interface TaskDao {
 
   List<Task> selectAllTasks();
 
+  int updateTaskById(UUID id, Task task);
+
 }

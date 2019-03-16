@@ -3,9 +3,12 @@ package com.rutkauskas.toDoBackend.api;
 import com.rutkauskas.toDoBackend.model.Task;
 import com.rutkauskas.toDoBackend.service.TaskService;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,5 +30,10 @@ public class TaskController {
   @GetMapping("/")
   public List<Task> getAllTasks() {
     return taskService.getAllTasks();
+  }
+
+  @PutMapping(path = "/{id}")
+  public void updateTask(@PathVariable("id") UUID id, @RequestBody Task taskToUpdate) {
+    taskService.updateTask(id, taskToUpdate);
   }
 }

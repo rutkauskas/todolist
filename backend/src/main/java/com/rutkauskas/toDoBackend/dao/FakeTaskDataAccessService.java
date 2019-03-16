@@ -21,4 +21,14 @@ public class FakeTaskDataAccessService implements TaskDao {
   public List<Task> selectAllTasks() {
     return DB;
   }
+
+  @Override
+  public int updateTaskById(UUID id, Task newTask) {
+    return DB.stream()
+        .filter(task -> task.getId().equals(id)).findFirst()
+        .map(task -> {
+          task.setArchived(newTask.isArchived());
+          return 1;
+        }).orElse(0);
+  }
 }
