@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 
 export class TodoItem extends Component {
   render() {
+    const {id, title, archived } = this.props.todo;
     return (
       <div style={itemStyle}>
-       <p>{this.props.todo.title}</p>
+       <p>
+         {title}
+         <button onClick={this.props.archiveTodo.bind(this, id)} className="btn" style={btnStyle}>Archive</button>
+       </p>
       </div>
     )
   }
@@ -18,8 +22,13 @@ TodoItem.propTypes = {
 
 const itemStyle = {
   backgroundColor: '#f4f4f4',
-  padding: '10px',
+  padding: '2px 0px 2px 2px',
   borderBottom: '1px #ccc dotted'
+}
+
+const btnStyle = {
+ // color: '#f00',
+  float: 'right',
 }
 
 export default TodoItem

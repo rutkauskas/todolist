@@ -18,7 +18,7 @@ class App extends Component {
       {
         id: uuid.v4(),
         title: 'Todo Task 2',
-        archived: false
+        archived: true
       },
       {
         id: uuid.v4(),
@@ -38,6 +38,16 @@ class App extends Component {
     console.log(title)
   }
 
+  //Archive Todo
+  archiveTodo = (id) => {
+    this.setState({ todos : this.state.todos.map(todo => {
+      if(todo.id === id) {
+        todo.archived = true
+      }
+      return todo;
+    })});
+  }
+
   render() {
     return (
       <Router>
@@ -47,12 +57,12 @@ class App extends Component {
             <Route exact path="/" render={props => (
               <React.Fragment>
                 <AddTodo addTodo={this.addTodo}/>
-                <Todos todos={this.state.todos}/>
+                <Todos todos={this.state.todos.filter(todo => todo.archived !== true)} archiveTodo={this.archiveTodo}/>
               </React.Fragment>
             )} />
             <Route path="/archived" render={props => (
               <React.Fragment>
-                <Todos todos={this.state.todos}/>
+                <Todos todos={this.state.todos.filter(todo => todo.archived !== false)} archiveTodo={this.archiveTodo}/>
               </React.Fragment>
             )} />
           </div>
