@@ -29,6 +29,9 @@
 
 #########################################################
 # Frontend ignore
+### IntelliJ IDEA ###
+/front/.idea
+
 # dependencies
 /front/node_modules
 /front/.pnp
