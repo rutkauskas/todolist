@@ -1,6 +1,7 @@
 package com.rutkauskas.toDoBackend.dao;
 
 import com.rutkauskas.toDoBackend.model.Task;
+import java.util.List;
 import java.util.UUID;
 
 public interface TaskDao {
@@ -11,5 +12,7 @@ public interface TaskDao {
     UUID id = UUID.randomUUID();
     return insertTask(id, task);
   }
+
+  List<Task> selectAllTasks();
 
 }
