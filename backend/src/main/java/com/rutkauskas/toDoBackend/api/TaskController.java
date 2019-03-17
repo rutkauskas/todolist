@@ -5,6 +5,7 @@ import com.rutkauskas.toDoBackend.service.TaskService;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,18 +23,21 @@ public class TaskController {
     this.taskService = taskService;
   }
 
+  @CrossOrigin
   @PostMapping("/")
-  public void addTask(@RequestBody Task task) {
-    taskService.addTask(task);
+  public Task addTask(@RequestBody Task task) {
+    return taskService.addTask(task);
   }
 
+  @CrossOrigin
   @GetMapping("/")
   public List<Task> getAllTasks() {
     return taskService.getAllTasks();
   }
 
+  @CrossOrigin
   @PutMapping(path = "/{id}")
-  public void updateTask(@PathVariable("id") UUID id, @RequestBody Task taskToUpdate) {
-    taskService.updateTask(id, taskToUpdate);
+  public Task updateTask(@PathVariable("id") UUID id, @RequestBody Task taskToUpdate) {
+    return taskService.updateTask(id, taskToUpdate);
   }
 }

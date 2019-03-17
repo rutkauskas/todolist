@@ -4,48 +4,43 @@ import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import uuid from 'uuid';
+import axios from 'axios';
 
 import './App.css';
 
 class App extends Component {
   state = {
-    todos: [
-      {
-        id: uuid.v4(),
-        title: 'Todo Task 1',
-        archived: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'Todo Task 2',
-        archived: true
-      },
-      {
-        id: uuid.v4(),
-        title: 'Todo Task 3',
-        archived: false
-      }
-    ]
+    todos: []
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:8080/')
+      .then(res => this.setState({ todos : res.data }))
+  }
+
+  //Add Todo
   addTodo = (title) => {
-    const newTodo = {
+    axios.post('http://localhost:8080/', {
       id: uuid.v4(),
       title,
       archived: false
-    }
-    this.setState({ todos: [...this.state.todos, newTodo] });
-    console.log(title)
+    })
+      .then(res => this.setState({ todos : [...this.state.todos, res.data]
+     }));
+
   }
 
   //Archive Todo
   archiveTodo = (id) => {
-    this.setState({ todos : this.state.todos.map(todo => {
-      if(todo.id === id) {
-        todo.archived = true
-      }
-      return todo;
-    })});
+    axios.put(`http://localhost:8080/${id}`, {
+      archived: true
+    })
+      .then(res => this.setState({ todos: this.state.todos.map(todo => {
+        if(todo.id === id) {
+          todo.archived = true
+        }
+        return todo;
+      }) }));
   }
 
   render() {

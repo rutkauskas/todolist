@@ -18,7 +18,7 @@ public class TaskService {
     this.taskDao = taskDao;
   }
 
-  public int addTask(Task task) {
+  public Task addTask(Task task) {
     return taskDao.insertTask(task);
   }
 
@@ -26,7 +26,7 @@ public class TaskService {
     return taskDao.selectAllTasks();
   }
 
-  public int updateTask(UUID id, Task newTask) {
+  public Task updateTask(UUID id, Task newTask) {
     return taskDao.updateTaskById(id, newTask);
   }
 }

@@ -6,15 +6,15 @@ import java.util.UUID;
 
 public interface TaskDao {
 
-  int insertTask(UUID id, Task task);
+  Task insertTask(UUID id, Task task);
 
-  default int insertTask(Task task) {
+  default Task insertTask(Task task) {
     UUID id = UUID.randomUUID();
     return insertTask(id, task);
   }
 
   List<Task> selectAllTasks();
 
-  int updateTaskById(UUID id, Task task);
+  Task updateTaskById(UUID id, Task task);
 
 }

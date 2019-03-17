@@ -12,9 +12,9 @@ public class FakeTaskDataAccessService implements TaskDao {
   private static List<Task> DB = new ArrayList<>();
 
   @Override
-  public int insertTask(UUID id, Task task) {
+  public Task insertTask(UUID id, Task task) {
     DB.add(new Task(id, task.getTitle(), task.isArchived()));
-    return 1;
+    return task;
   }
 
   @Override
@@ -23,12 +23,12 @@ public class FakeTaskDataAccessService implements TaskDao {
   }
 
   @Override
-  public int updateTaskById(UUID id, Task newTask) {
+  public Task updateTaskById(UUID id, Task newTask) {
     return DB.stream()
         .filter(task -> task.getId().equals(id)).findFirst()
         .map(task -> {
           task.setArchived(newTask.isArchived());
-          return 1;
-        }).orElse(0);
+          return task;
+        }).orElse(null);
   }
 }
