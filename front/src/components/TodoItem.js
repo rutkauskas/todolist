@@ -4,11 +4,15 @@ import PropTypes from 'prop-types';
 export class TodoItem extends Component {
   render() {
     const {id, title, archived } = this.props.todo;
+    let button;
+    if (!archived) {
+      button = <button onClick={this.props.archiveTodo.bind(this, id)} className="btn" style={btnStyle}>Archive</button>
+    }
     return (
       <div style={itemStyle}>
        <p>
          {title}
-         <button onClick={this.props.archiveTodo.bind(this, id)} className="btn" style={btnStyle}>Archive</button>
+         {button}
        </p>
       </div>
     )
