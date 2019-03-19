@@ -32,6 +32,11 @@
 ### IntelliJ IDEA ###
 /front/.idea
 
+### Gradle
+/front/.gradle
+/front/gradlew
+/front/gradlew.bat
+
 # dependencies
 /front/node_modules
 /front/.pnp
