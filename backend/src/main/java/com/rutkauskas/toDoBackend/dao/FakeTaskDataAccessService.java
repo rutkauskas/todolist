@@ -13,8 +13,9 @@ public class FakeTaskDataAccessService implements TaskDao {
 
   @Override
   public Task insertTask(UUID id, Task task) {
-    DB.add(new Task(id, task.getTitle(), task.isArchived()));
-    return task;
+    Task newTask = new Task(id, task.getTitle(), task.isArchived());
+    DB.add(newTask);
+    return newTask;
   }
 
   @Override
